@@ -1,6 +1,7 @@
 
 #Install corda by Docker compose
-to clone deploy corda package as git link below :
+to clone deploy corda package :
+
 git clone https://github.com/bizqsoft/corda.git
 
 Deploy Node : Notary and Party A
@@ -17,7 +18,7 @@ myLegalName="O=PartyA,L=London,C=GB"
 
 p2pAddress="3.95.222.23:10005"
 
-#1.) Copy deploy file to aws server Node A
+1.) Copy deploy file to aws server Node A
 
 scp -i "./corda-docker.pem" -r ./deploy/nodeA ubuntu@3.95.222.23:~/
 
@@ -25,15 +26,15 @@ scp -i "./corda-docker.pem" -r ./deploy/commands.sh ubuntu@3.95.222.23:~/
 
 scp -i "./corda-docker.pem" -r ./deploy/nodeA/notary/corda.jar ubuntu@3.95.222.23:~/
 
-#2) Access ssh console aws NodeA
+2) Access ssh console aws NodeA
 ssh -i "corda-docker.pem" ubuntu@ec2-3-95-222-23.compute-1.amazonaws.com
 
-#3) run set up Server shell script file command.
+3) run set up Server shell script file command.
 cd ~
 chmod a+x ./commands.sh
 ./commands.sh
 
-#4) run database migration script
+4) run database migration script
 
 cd /nodeA/notary
 
@@ -43,7 +44,7 @@ cd /nodeA/partyA
 
 java -jar corda.jar run-migration-scripts --core-schemas --app-schemas --allow-hibernate-to-manage-app-schema
 
-#5) Run Server
+5) Run Server
 
 docker start
 
@@ -78,7 +79,7 @@ Navigate to the root project
 ./gradlew runPartyAServer
 
 
-#Deploy Node : Party B
+Deploy Node : Party B
 
 config network nod : partyb/node.conf and change nodename and node ip:
 
@@ -87,17 +88,17 @@ myLegalName="O=PartyB,L=New York,C=US"
 p2pAddress="3.93.6.36:10008"
 
 
-#1) Copy deploy file to aws server Node B
+1) Copy deploy file to aws server Node B
 
 scp -i "./corda-docker.pem" -r ./deploy/nodeB ubuntu@3.93.6.36:~/
 
 scp -i "./corda-docker.pem" -r ./deploy/commands.sh ubuntu@3.93.6.36:~/
 
-#2) Access ssh console aws NodeB
+2) Access ssh console aws NodeB
 
 ssh -i "corda-docker.pem" ubuntu@ec2-3-93-6-36.compute-1.amazonaws.com
 
-#3) run set up Server shell script file command.
+3) run set up Server shell script file command.
 
 cd ~
 
@@ -105,7 +106,7 @@ chmod a+x ./commands.sh
 
 ./commands.sh
 
-#4) run database migration script
+4) run database migration script
 
 cd /nodeB/partyB
 
@@ -114,7 +115,7 @@ java -jar corda.jar run-migration-scripts --core-schemas --app-schemas --allow-h
 java -jar corda.jar
 
 
-#5) Run Server
+5) Run Server
 
 User docker start.
 
@@ -144,7 +145,7 @@ Navigate to the root project
 
 ./build/node/runnodes
 
-#6) Run Spring Webserver
+6) Run Spring Webserver
 
 ./gradlew runPartyBServer
 
@@ -158,7 +159,7 @@ docker start <Container id>
 
 docker stop <Container id>
 
-#Manual corda install on ubuntu.
+Manual corda install on ubuntu.
 
 1) sudo apt-get update
 
