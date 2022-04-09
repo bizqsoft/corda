@@ -36,7 +36,7 @@ scp -i "./corda-docker.pem" -r ./deploy/nodeA/notary/corda.jar ubuntu@3.95.222.2
 ```sh
 ssh -i "corda-docker.pem" ubuntu@ec2-3-95-222-23.compute-1.amazonaws.com
 ```
-5. run set up server shell script file command.
+5. run set up server shell script file.
 ```sh
 cd ~
 chmod a+x ./commands.sh
@@ -103,7 +103,7 @@ scp -i "./corda-docker.pem" -r ./deploy/nodeB/notary/corda.jar ubuntu@3.93.6.36:
 ```sh
 ssh -i "corda-docker.pem" ubuntu@ec2-3-93-6-36.compute-1.amazonaws.com
 ```
-5. run set up server shell script file command.
+5. run set up server shell script file.
 ```sh
 cd ~
 chmod a+x ./commands.sh
