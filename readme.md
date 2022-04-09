@@ -16,43 +16,42 @@ To get a local copy up and running follow these simple example steps.
 
 
 1. Clone deploy corda package repo
-   ```sh
+```sh
    git clone https://github.com/bizqsoft/corda.git
    ```
 2. Deploy Node : Notary and Party A ,config network nod : partya/node.conf and change nodename and node ip:
-   ```sh
-        myLegalName="O=PartyA,L=London,C=GB"
-        p2pAddress="3.95.222.23:10005"
+```sh
+    myLegalName="O=PartyA,L=London,C=GB"
+    p2pAddress="3.95.222.23:10005"
    ```
 3. Copy deploy file to aws server Node A
-   ```sh
-  scp -i "./corda-docker.pem" -r ./deploy/nodeA ubuntu@3.95.222.23:~/
+```sh
+    scp -i "./corda-docker.pem" -r ./deploy/nodeA ubuntu@3.95.222.23:~/
+   ```
+```sh
   scp -i "./corda-docker.pem" -r ./deploy/commands.sh ubuntu@3.95.222.23:~/
+   ```
+```sh
   scp -i "./corda-docker.pem" -r ./deploy/nodeA/notary/corda.jar ubuntu@3.95.222.23:~/
    ```
 4. Access ssh console aws NodeA
-   ```sh
+```sh
   ssh -i "corda-docker.pem" ubuntu@ec2-3-95-222-23.compute-1.amazonaws.com
    ```
-
 5. run set up server shell script file command.
-   ```sh
+```sh
     cd ~
     chmod a+x ./commands.sh
     ./commands.sh
    ```
-
 6. run database migration script.
 ```sh
 cd /nodeA/notary
 java -jar corda.jar run-migration-scripts --core-schemas --app-schemas --allow-hibernate-to-manage-app-schema
-
    ```
-
 ```sh
 cd /nodeA/partyA
 java -jar corda.jar run-migration-scripts --core-schemas --app-schemas --allow-hibernate-to-manage-app-schema
-
    ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
