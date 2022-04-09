@@ -19,7 +19,7 @@ To get a local copy up and running follow these simple example steps.
 ```sh
 git clone https://github.com/bizqsoft/corda.git
 ```
-2. Deploy Node : Notary and Party A ,config network nod : partya/node.conf and change nodename and node ip:
+2. Deploy Node : Notary and Party A ,config network nod by naviget to partya/node.conf then change node name and node ip:
 ```sh
 myLegalName="O=PartyA,L=London,C=GB"
 p2pAddress="3.95.222.23:10005"
