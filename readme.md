@@ -53,14 +53,13 @@ java -jar corda.jar run-migration-scripts --core-schemas --app-schemas --allow-h
 cd /nodeA/partyA
 java -jar corda.jar run-migration-scripts --core-schemas --app-schemas --allow-hibernate-to-manage-app-schema
 ```
-7. Run Server
-by docker
+Run corda server by docker
 ```sh
 cd /nodeA
 sudo chown $(whoami) -R ./*
 docker-compose -f ./docker-compose-vm1.yaml up
 ```
-or manual start
+Run corda server by manual
 
 ```sh
 cd /nodeA/notary
@@ -69,12 +68,13 @@ cd /nodeA/partya
 java -jar corda.jar
 ```
 
-or script start
+Run corda server by script
 
 ```sh
 ./build/node/runnodes
 ```
-8. Run Spring Webserver
+
+Run Spring Webserver
 ```sh
 ./gradlew runPartyAServer
 ```
