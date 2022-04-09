@@ -10,87 +10,58 @@
 This is an example of how you may give instructions on setting up your project locally.
 To get a local copy up and running follow these simple example steps.
 
-### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+### Install corda by Docker compose
 
-### Installation
 
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Clone deploy corda package repo
    ```sh
-   git clone https://github.com/your_username_/Project-Name.git
+   git clone https://github.com/bizqsoft/corda.git
    ```
-3. Install NPM packages
+2. Deploy Node : Notary and Party A ,config network nod : partya/node.conf and change nodename and node ip:
    ```sh
-   npm install
+        myLegalName="O=PartyA,L=London,C=GB"
+        p2pAddress="3.95.222.23:10005"
    ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
+3. Copy deploy file to aws server Node A
+   ```sh
+  scp -i "./corda-docker.pem" -r ./deploy/nodeA ubuntu@3.95.222.23:~/
+  scp -i "./corda-docker.pem" -r ./deploy/commands.sh ubuntu@3.95.222.23:~/
+  scp -i "./corda-docker.pem" -r ./deploy/nodeA/notary/corda.jar ubuntu@3.95.222.23:~/
+   ```
+4. Access ssh console aws NodeA
+   ```sh
+  ssh -i "corda-docker.pem" ubuntu@ec2-3-95-222-23.compute-1.amazonaws.com
+   ```
+
+5. run set up server shell script file command.
+   ```sh
+    cd ~
+    chmod a+x ./commands.sh
+    ./commands.sh
+   ```
+
+6. run database migration script.
+   ```sh
+cd /nodeA/notary
+java -jar corda.jar run-migration-scripts --core-schemas --app-schemas --allow-hibernate-to-manage-app-schema
+
+   ```
+
+```sh
+cd /nodeA/partyA
+java -jar corda.jar run-migration-scripts --core-schemas --app-schemas --allow-hibernate-to-manage-app-schema
+
    ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
 
-<!-- USAGE EXAMPLES -->
-## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-#Install corda by Docker compose
-to clone deploy corda package :
-
-git clone https://github.com/bizqsoft/corda.git
-
-Deploy Node : Notary and Party A
-
-config network nod : partya/node.conf and change nodename and node ip:
-
-myLegalName="O=PartyA,L=London,C=GB"
-
-p2pAddress="3.95.222.23:10005"
-
-config network nod : notary/node.conf and change nodename and node ip:
-
-myLegalName="O=PartyA,L=London,C=GB"
-
-p2pAddress="3.95.222.23:10005"
-
-1.) Copy deploy file to aws server Node A
-
-scp -i "./corda-docker.pem" -r ./deploy/nodeA ubuntu@3.95.222.23:~/
-
-scp -i "./corda-docker.pem" -r ./deploy/commands.sh ubuntu@3.95.222.23:~/
-
-scp -i "./corda-docker.pem" -r ./deploy/nodeA/notary/corda.jar ubuntu@3.95.222.23:~/
-
-2) Access ssh console aws NodeA
-ssh -i "corda-docker.pem" ubuntu@ec2-3-95-222-23.compute-1.amazonaws.com
-
-3) run set up Server shell script file command.
-cd ~
-chmod a+x ./commands.sh
-./commands.sh
 
 4) run database migration script
 
-cd /nodeA/notary
-
-java -jar corda.jar run-migration-scripts --core-schemas --app-schemas --allow-hibernate-to-manage-app-schema
 
 cd /nodeA/partyA
 
