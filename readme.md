@@ -43,7 +43,7 @@ To get a local copy up and running follow these simple example steps.
    ```
 
 6. run database migration script.
-   ```sh
+```sh
 cd /nodeA/notary
 java -jar corda.jar run-migration-scripts --core-schemas --app-schemas --allow-hibernate-to-manage-app-schema
 
