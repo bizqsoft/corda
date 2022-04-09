@@ -53,52 +53,34 @@ java -jar corda.jar run-migration-scripts --core-schemas --app-schemas --allow-h
 cd /nodeA/partyA
 java -jar corda.jar run-migration-scripts --core-schemas --app-schemas --allow-hibernate-to-manage-app-schema
 ```
+7. Run Server
+by docker
+```sh
+cd /nodeA
+sudo chown $(whoami) -R ./*
+docker-compose -f ./docker-compose-vm1.yaml up
+```
+or manual start
+
+```sh
+cd /nodeA/notary
+java -jar corda.jar
+cd /nodeA/partya
+java -jar corda.jar
+```
+
+or script start
+
+```sh
+./build/node/runnodes
+```
+8. Run Spring Webserver
+```sh
+./gradlew runPartyAServer
+```
+
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-
-4) run database migration script
-
-
-cd /nodeA/partyA
-
-java -jar corda.jar run-migration-scripts --core-schemas --app-schemas --allow-hibernate-to-manage-app-schema
-
-5) Run Server
-
-docker start
-
-cd /nodeA
-
-sudo chown $(whoami) -R ./*
-
-docker-compose -f ./docker-compose-vm1.yaml up
-
-or
-
-manual start
-
-cd /nodeA/notary
-
-java -jar corda.jar
-
-cd /nodeA/partya
-
-java -jar corda.jar
-
-or
-
-script start
-
-Navigate to the root project 
-
-./build/node/runnodes
-
-6) Run Spring Webserver
-
-./gradlew runPartyAServer
 
 
 Deploy Node : Party B
